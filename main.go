@@ -106,6 +106,8 @@ type InsuranceProduct struct {
 	InformationLink   NullJsonString `json:"information_link,omitempty"`
 	InformationLinkZh NullJsonString `json:"information_link_zh,omitempty"`
 	UpdateTime        NullJsonString `json:"update_time,omitempty"`
+	Tag               NullJsonString `json:"tag,omitempty"`
+	TagZh             NullJsonString `json:"tag_zh,omitempty"`
 }
 
 type CoverageItem struct {
@@ -312,7 +314,8 @@ func insuranceProductsHandler(w http.ResponseWriter, r *http.Request) {
 	rows, err := db.Query(`SELECT insurance_id, provider_id, insurance_name, insurance_name_zh, remark, remark_zh, 
 		min_age, min_age_zh, max_age, max_age_zh, coinsurance, coinsurance_zh, suitable_pet_type, suitable_pet_type_zh,
 		cat_breed_type, cat_breed_type_zh, dog_breed_type, dog_breed_type_zh, breed_type_remark, breed_type_remark_zh,
-		payment_mode, payment_mode_zh, waiting_period, waiting_period_zh, information_link, information_link_zh, update_time
+		payment_mode, payment_mode_zh, waiting_period, waiting_period_zh, information_link, information_link_zh, update_time,
+		tag, tag_zh
 		FROM product`)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -326,7 +329,8 @@ func insuranceProductsHandler(w http.ResponseWriter, r *http.Request) {
 		if err := rows.Scan(&p.InsuranceId, &p.ProviderId, &p.InsuranceName, &p.InsuranceNameZh, &p.Remark, &p.RemarkZh,
 			&p.MinAge, &p.MinAgeZh, &p.MaxAge, &p.MaxAgeZh, &p.Coinsurance, &p.CoinsuranceZh, &p.SuitablePetType, &p.SuitablePetTypeZh,
 			&p.CatBreedType, &p.CatBreedTypeZh, &p.DogBreedType, &p.DogBreedTypeZh, &p.BreedTypeRemark, &p.BreedTypeRemarkZh,
-			&p.PaymentMode, &p.PaymentModeZh, &p.WaitingPeriod, &p.WaitingPeriodZh, &p.InformationLink, &p.InformationLinkZh, &p.UpdateTime); err == nil {
+			&p.PaymentMode, &p.PaymentModeZh, &p.WaitingPeriod, &p.WaitingPeriodZh, &p.InformationLink, &p.InformationLinkZh, &p.UpdateTime,
+			&p.Tag, &p.TagZh); err == nil {
 			products = append(products, p)
 		}
 	}
