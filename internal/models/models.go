@@ -51,7 +51,10 @@ type Clinic struct {
 	ApplemapURL    string `json:"applemap_url"`
 	Latitude       string `json:"latitude"`
 	Longitude      string `json:"longitude"`
-	Rating         string `json:"rating"`
+	Rating          string `json:"rating"`
+	PhotoURL        string `json:"photo_url"`
+	GooglePlaceID   string `json:"google_place_id"`
+	PhotoReference  string `json:"photo_reference"`
 }
 
 // --- Insurance Models ---

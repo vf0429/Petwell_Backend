@@ -21,8 +21,8 @@ func main() {
 	http.HandleFunc("/vaccines", handlers.VaccinesHandler)
 	http.HandleFunc("/register", handlers.RegisterHandler)
 	http.HandleFunc("/posts", handlers.PostsHandler)
-	http.HandleFunc("/clinics", handlers.ClinicsHandler)
-	http.HandleFunc("/emergency-clinics", handlers.EmergencyClinicsHandler)
+	http.HandleFunc("/clinics", handlers.NewClinicsHandler(cfg))
+	http.HandleFunc("/emergency-clinics", handlers.NewEmergencyClinicsHandler(cfg))
 
 	// Insurance handlers
 	http.HandleFunc("/insurance-companies", handlers.InsuranceCompaniesHandler)
